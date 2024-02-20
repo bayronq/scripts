@@ -1,7 +1,14 @@
 #!/bin/bash
+#Script para comprimir y ordenamiento de archivos .log
+#Realizado por Bayron Cuá
+#10/02/2024
 
 #variables
 origen="/loghist/FF8"
+log="$origen"/ordercompress.log
+fechalog=$(date +%D" "%T)
+
+echo "Orden y Zip del día $fechalog" >$log
 
 #array
 diario=('AlertC01' 'AlertD02' 'BPTWA01' 'BPTWB01' 'BPTWC01' 'BPTWD01' 'bcC01' 'bcD01')
@@ -9,11 +16,11 @@ mensual=('wasWSA01' 'wasWSA02' 'wasWSB01' 'wasWSB02' 'wasWSC01' 'wasWSC02' 'wasW
 
 # Función para comprimir archivos
 compress_log_file() {
-    fecha=$(date +%D" "%T)
+    fecha=$(date +%D" "%T) #variable para tomar hora en cada ejecución
     local file_path=$1
     local original_dir=$(dirname "$file_path")
     local file_name=$(basename "$file_path" .log)
-    log="$original_dir"/ordercompress.log
+    #log="$original_dir"/ordercompress.log   #Guarda log en cada ruta de los subidrectorios
     # Obtiene fecha de modificación del archivo
     local mod_year=$(date -r "$file_path" +"%Y")
     local mod_month=$(date -r "$file_path" +"%m")
